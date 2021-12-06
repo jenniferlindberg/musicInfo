@@ -1,21 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Dropdown = (props) => {
-  const [selectedValue, setSelectedValue] = useState();
+  const dropdownChanged = (e) => {
+    props.changed(e.target.value);
+  };
 
   return (
-    <div>
+    <div className="col-sm-6 form-group row px-0">
+      <label className="form-label col-sm-2">{props.label}</label>
       <select
-        value={selectedValue}
-        onChange={(e) => setSelectedValue(e.target.value)}
+        value={props.selectedValue}
+        onChange={dropdownChanged}
+        className="form-control form-control-sm col-sm-10"
       >
         {props.options.map((item, idx) => (
-          <option key={idx} value={item.value}>
+          <option key={idx} value={item.id}>
             {item.name}
           </option>
         ))}
       </select>
-      <p>{selectedValue}</p>
     </div>
   );
 };
